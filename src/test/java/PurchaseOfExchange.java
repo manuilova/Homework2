@@ -29,12 +29,12 @@ public class PurchaseOfExchange {
                 .findElement(By.xpath("//div[contains(@class, 'block_important_gradient')]//form//*[contains(text(), 'купить')]"))
                 .click();
 
-        WebElement input = driver.findElement(By.id("fn_s1"));
-        input.sendKeys("2000");
-        String expectedResult = "49 982,2";
+        driver
+                .findElement(By.id("fn_s1"))
+                .sendKeys("2000");
 
         (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.textToBePresentInElementValue(By.id("fn_o1_1"), expectedResult));
+                .until(ExpectedConditions.textToBePresentInElementValue(By.id("fn_o1_1"), "49 982,2"));
 
     }
 
