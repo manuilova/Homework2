@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,15 +27,19 @@ public class PurchaseOfExchange {
     public void testName() throws Exception  {
 
         driver
-                .findElement(By.xpath("//div[contains(@class, 'block_important_gradient')]//form//*[contains(text(), 'купить')]"))
+                .findElement(By.xpath("//table[@class='converter']//span[text()='купить']"))
                 .click();
 
         driver
                 .findElement(By.id("fn_s1"))
                 .sendKeys("2000");
 
+        WebElement exchangeType = driver.findElement(By.id("fn_bank"));
+        new Select(exchangeType).selectByVisibleText("НБУ");
+
         (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.textToBePresentInElementValue(By.id("fn_o1_1"), "49 982,2"));
+                .until(ExpectedConditions.textToBePresentInElementValue(By.id("fn_o1_1"), "49\u00A0700,82"));
+
 
     }
 
